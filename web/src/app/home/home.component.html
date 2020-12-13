@@ -1,0 +1,134 @@
+<h2>{{ projectName }} Project Loaded!</h2>
+<button type="button" class="btn btn-secondary" (click)="onCreate(template)">
+    Add Freelancer
+</button>
+<hr />
+<table class="table-responsive d-block d-md-table stripe hover cell-border compact order-column" datatable
+    [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Username</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Skill Sets</th>
+            <th>Hobbies</th>
+            <th>Created Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userModel; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{user?.username}}</td>
+            <td>{{user?.name}}</td>
+            <td>{{user?.age}}</td>
+            <td>{{user?.email}}</td>
+            <td>{{user?.phone_number}}</td>
+            <td>{{user?.skill_sets}}</td>
+            <td>{{user?.hobbies}}</td>
+            <td>{{user.createdAt | date: 'dd-MM-yyyy hh:mm a'}}</td>
+            <td class="text-nowrap text-center">
+                <button (click)="onEdit(i, user, template)" mat-icon-button color="primary" matTooltipPosition="above"
+                    matTooltip="Update">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button (click)="onDelete(i, user, confirmation)" mat-icon-button color="warn"
+                    matTooltipPosition="above" matTooltip="Remove">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #template>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div mat-dialog-title class="bg-header p-2 d-flex justify-content-between align-content-center">
+            {{isEdit ? 'Edit':'Create'}} Freelancer
+        </div>
+
+        <mat-dialog-content>
+            <div class="form-group">
+                <label class="required" for="name">Username</label>
+                <input type="text" class="form-control" formControlName="username" (change)="validateUsername($event)">
+                <div *ngIf="usernameExists">
+                    <mat-error *ngIf="usernameExists">Username already exists.</mat-error>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="required" for="name">Name</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="required" for="email">Email</label>
+                        <input type="text" class="form-control" formControlName="email">
+                        <div
+                            *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)">
+                            <mat-error *ngIf="userForm.controls['email'].invalid">
+                                Invalid email.</mat-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" class="form-control" formControlName="age">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Phone Number</label>
+                <input type="text" class="form-control" formControlName="phone_number">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Skill Set</label>
+                <input type="text" class="form-control" formControlName="skill_sets">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Hobby</label>
+                <input type="text" class="form-control" formControlName="hobbies">
+            </div>
+        </mat-dialog-content>
+
+        <div mat-dialog-actions class="modal-footer">
+            <button mat-dialog-close mat-raised-button>
+                No
+            </button>
+            <button mat-raised-button color="primary" [disabled]="userForm.invalid || saving">
+                <mat-progress-bar *ngIf="saving" mode="indeterminate"></mat-progress-bar>
+                Save
+            </button>
+        </div>
+    </form>
+</ng-template>
+
+
+<ng-template #confirmation>
+    <h1 mat-dialog-title>Delete</h1>
+    <div mat-dialog-content class="text-center">
+        <div>
+            <mat-icon>delete</mat-icon>
+        </div>
+        <p>Confirm to delete '{{user.name}}'</p>
+    </div>
+    <div mat-dialog-actions class="modal-footer justify-content-between">
+        <button (click)="onYes()" mat-raised-button color="warn" [disabled]="saving">
+            <mat-progress-bar *ngIf="saving" mode="indeterminate"></mat-progress-bar>
+            Yes
+        </button>
+        <button (click)="onNo()" mat-raised-button class="pull-right">
+            No
+        </button>
+    </div>
+</ng-template>

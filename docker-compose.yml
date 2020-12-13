@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+        mariadb:
+                image: mariadb
+                restart: always
+                ports:
+                        - 3307:3306
+                networks:
+                        - framework-net
+                hostname: mariadb
+                container_name: mariadb
+                volumes:
+                        - mariadb_data:/var/lib/mysql
+                environment:
+                        - TZ=Asia/Kuala_Lumpur
+                        - MYSQL_ROOT_PASSWORD=P@ssw0rd
+                        - MYSQL_DATABASE=freedirdb
+                        - MYSQL_USER=freediruser
+                        - MYSQL_PASSWORD=P@ssw0rd
+        service:
+                build: ./service
+                restart: always
+                ports:
+                        - 3000:3000
+                networks:
+                        - framework-net
+                hostname: service
+                container_name: service
+                environment:
+                        - TZ=Asia/Kuala_Lumpur
+                        - APP_INTERNAL_HOST=0.0.0.0
+                        - APP_INTERNAL_PORT=3000
+                        - APP_CONTEXT_PATH=/freedir
+                        - DB_DIALECT=mariadb
+                        - DB_NAME=freedirdb
+                        - DB_USERNAME=freediruser
+                        - DB_PASSWORD=P@ssw0rd
+                        - DB_HOST=mariadb
+                        - DB_PORT=3306
+        web:
+                build: ./web
+                restart: always
+                ports:
+                        - 8001:8001
+                networks:
+                        - framework-net
+                hostname: web
+                container_name: web
+                environment:
+                        - TZ=Asia/Kuala_Lumpur
+        proxy:
+                image: nginx:1.17.2-alpine
+                hostname: proxy
+                container_name: proxy
+                restart: on-failure
+                ports:
+                        - 80:80
+                        # - 443:443
+                networks:
+                        framework-net:
+                volumes:
+                        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+volumes:
+        mariadb_data:
+networks:
+        framework-net:

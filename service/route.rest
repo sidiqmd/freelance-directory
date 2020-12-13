@@ -1,0 +1,52 @@
+GET http://localhost:3000/freedir
+
+###
+
+GET http://localhost:3000/freedir/user
+
+###
+
+GET http://localhost:3000/freedir/user/138b29d5-53b5-4b5a-b0cd-9b26282e9b09
+
+###
+
+GET http://localhost:3000/freedir/user/exists?username=sidiq2
+
+###
+
+POST http://localhost:3000/freedir/user
+Content-Type: application/json
+
+{
+  "username": "sidiq",
+  "password": "pass",
+  "name": "Sidiq",
+  "age": 30,
+  "email": "sidiqmd@gmail.com",
+  "phone_number": "0123456789",
+  "skill_set": "JAVA,NodeJs",
+  "hobby":  "Badminton,Netflix"
+}
+###
+
+PUT http://localhost:3000/freedir/user/138b29d5-53b5-4b5a-b0cd-9b26282e9b09
+Content-Type: application/json
+
+{
+  "name": "sidiq1000",
+  "email": "sidiqmd@gmail.com1000000000",
+  "phone_number": "012345678922",
+  "hobby":  "Football"
+}
+###
+
+DELETE http://localhost:3000/freedir/user/ac5e81b5-a413-4d36-afe6-3b35c9d33794
+
+###
+
+PUT http://localhost:3000/freedir/user/138b29d5-53b5-4b5a-b0cd-9b26282e9b09/password
+Content-Type: application/json
+
+{
+  "password": "sidiq123"
+}

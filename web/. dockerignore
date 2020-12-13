@@ -1,0 +1,17 @@
+dist/
+node_modules/
+.git/
+.gradle/
+.vscode/
+./log
+./tmp
+package.lock.json
+
+.dockerignore
+.editorconfig
+.gitignore
+.gitlab.yml
+build.sh
+*Dockerfile*
+*docker-compose*
+*Dockerfile-prod*

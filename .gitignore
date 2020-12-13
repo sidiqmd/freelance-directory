@@ -1,0 +1,4 @@
+/service-nest/
+/service-nestjs/
+
+\.vscode/launch\.json
