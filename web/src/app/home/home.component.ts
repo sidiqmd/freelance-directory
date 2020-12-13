@@ -54,8 +54,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             'age': new FormControl(0),
             'email': new FormControl(null, [Validators.required, Validators.email]),
             'phone_number': new FormControl(null),
-            'skill_sets': new FormControl(null),
-            'hobbies': new FormControl(null),
+            'skill_set': new FormControl(null),
+            'hobby': new FormControl(null),
         });
     }
 
@@ -86,8 +86,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             'age': user.age,
             'email': user.email,
             'phone_number': user.phone_number,
-            'skill_sets': user.skill_sets,
-            'hobbies': user.hobbies,
+            'skill_set': user.skill_set,
+            'hobby': user.hobby,
         });
         this.openModal(template);
     }
@@ -110,8 +110,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         uModel.age = user.age;
         uModel.email = user.email;
         uModel.phone_number = user.phone_number;
-        uModel.skill_sets = user.skill_sets;
-        uModel.hobbies = user.hobbies;
+        uModel.skill_set = user.skill_set;
+        uModel.hobby = user.hobby;
         return uModel;
     }
 

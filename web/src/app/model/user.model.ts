@@ -6,6 +6,6 @@ export class UserModel {
     age: string;
     email: string;
     phone_number: string;
-    skill_sets: string;
-    hobbies: string;
+    skill_set: string;
+    hobby: string;
 }
