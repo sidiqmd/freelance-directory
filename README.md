@@ -9,7 +9,9 @@ This demo project breaks down into three parts:
 * service - this is where all the APIs are implemented.
 * web - this is where all the UI is implemented.
 
->***Note**: Check out live demo [here](http://139.59.252.110).*
+>***Note**: 
+Check out live demo [here](http://139.59.252.110).
+Deplyed in [DigitalOcean](http://digitalocean.com) Droplet.*
 
 ## Technology used
 
