@@ -4,8 +4,8 @@ services:
         mariadb:
                 image: mariadb
                 restart: always
-                ports:
-                        - 3307:3306
+                # ports:
+                #         - 3307:3306
                 networks:
                         - framework-net
                 hostname: mariadb
@@ -21,8 +21,8 @@ services:
         service:
                 build: ./service
                 restart: always
-                ports:
-                        - 3000:3000
+                # ports:
+                #         - 3000:3000
                 networks:
                         - framework-net
                 hostname: service
@@ -41,8 +41,8 @@ services:
         web:
                 build: ./web
                 restart: always
-                ports:
-                        - 8001:8001
+                # ports:
+                #         - 8001:8001
                 networks:
                         - framework-net
                 hostname: web
