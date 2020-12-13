@@ -10,7 +10,7 @@ This demo project breaks down into three parts:
 * web - this is where all the UI is implemented.
 
 >***Note**:*
->Check out live demo [here](http://139.59.252.110).
+>Check out live demo [here](http://139.59.252.110).<br>
 >*Deplyod in [DigitalOcean](http://digitalocean.com) Droplet.*
 
 ## Technology used
