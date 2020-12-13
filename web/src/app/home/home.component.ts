@@ -86,8 +86,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             'age': user.age,
             'email': user.email,
             'phone_number': user.phone_number,
-            'skill_set': user.skill_set,
-            'hobby': user.hobby,
+            'skill_set': user.skill_sets,
+            'hobby': user.hobbies,
         });
         this.openModal(template);
     }
